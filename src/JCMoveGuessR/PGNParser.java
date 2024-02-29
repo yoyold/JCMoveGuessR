@@ -5,6 +5,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 public class PGNParser {
+    // parse the game moves
     public static void parsePGN() {
         try (BufferedReader reader = new BufferedReader(new FileReader("game.pgn"))) {
             String line;
@@ -20,7 +21,7 @@ public class PGNParser {
                 } else if (!line.isEmpty()) {
                     // move or comment
                     if (line.charAt(0) == '{') {
-                        // comment
+                        // comment within the game
                         continue;
                     } else {
                         // move
@@ -37,5 +38,10 @@ public class PGNParser {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    // parse the meta data for the game
+    public static void ParseMetaData() {
+
     }
 }
