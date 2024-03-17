@@ -1,6 +1,8 @@
 ## JCMoveGuessR
 
-![Logo](https://i.ibb.co/Pc4CdbP/Screenshot-2024-03-10-120723kl.png)
+<p align="center">
+  <img src="https://i.ibb.co/Pc4CdbP/Screenshot-2024-03-10-120723kl.png">
+</p>
 
 JCMoveGuessR is a survival game where the player is a neutral piece on a chessboard.
 
