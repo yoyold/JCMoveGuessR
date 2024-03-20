@@ -23,6 +23,7 @@ public class GameMenu {
             // Splash screen with ASCII art
 
             // Print start screen
+            System.out.println("");
             System.out.println("Enter one of the following options:");
             System.out.println("1) to play a game");
             System.out.println("2) to read in a new pgn file");
@@ -37,22 +38,27 @@ public class GameMenu {
             switch (choice) {
                 case 1:
                     // Logic to play a game
+                    System.out.println("");
                     System.out.println("Starting a new game...");
                     // Add game logic here
                     break;
                 case 2:
                     // Logic to read in a new PGN
+                    System.out.println("");
                     System.out.println("Reading in a new PGN...");
                     // Add file reading logic
                     break;
                 case 3:
                     // Logic to view highscores
+                    System.out.println("");
                     System.out.println("Viewing highscores...");
-                    // Add highscore viewing logic
+                    HighScores Highscore = new HighScores();
+                    Highscore.printHighScores();
                     break;
                 case 4:
                     // Exit the program
-                    System.out.println("Closing the program. Goodbye!");
+                    System.out.println("");
+                    System.out.println("Closing the program. Goodbye! \uD83D\uDC4B");
                     isRunning = false;
                     break;
                 default:
