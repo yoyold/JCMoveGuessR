@@ -3,70 +3,75 @@ package JCMoveGuessR;
 import java.util.Scanner;
 
 public class GameMenu {
-    public static void displayMenu(){
-        System.out.println("Welcome to JCMoveGuessR!");
-        System.out.println("");
-        String asciiArt =
-                "       _  _____ __  __                 _____                     _____  \n" +
-                        "      | |/ ____|  \\/  |               / ____|                   |  __ \\ \n" +
-                        "      | | |    | \\  / | _____   _____| |  __ _   _  ___  ___ ___| |__) |\n" +
-                        "  _   | | |    | |\\/| |/ _ \\ \\ / / _ \\ | |_ | | | |/ _ \\/ __/ __|  _  / \n" +
-                        " | |__| | |____| |  | | (_) \\ V /  __/ |__| | |_| |  __/\\__ \\__ \\ | \\ \\ \n" +
-                        "  \\____/ \\_____|_|  |_|\\___/ \\_/ \\___|\\_____\\__,_|\\___||___/___/_|  \\_\\ \n" +
-                        "                                                                         ";
-
-        System.out.println(asciiArt);
+    public static void displayMenu() {
         Scanner scanner = new Scanner(System.in);
         boolean isRunning = true;
 
         while (isRunning) {
-            // Splash screen with ASCII art
+            System.out.println("Welcome to JCMoveGuessR!");
+            System.out.println();
 
-            // Print start screen
-            System.out.println("");
-            System.out.println("Enter one of the following options:");
-            System.out.println("1) to play a game");
-            System.out.println("2) to read in a new pgn file");
-            System.out.println("3) to view highscores");
-            System.out.println("4) to close the program");
-            System.out.print("Enter your choice: ");
+            String asciiArt = "       _  _____ __  __                 _____                     _____  \n" +
+                    "      | |/ ____|  \\/  |               / ____|                   |  __ \\ \n" +
+                    "      | | |    | \\  / | _____   _____| |  __ _   _  ___  ___ ___| |__) |\n" +
+                    "  _   | | |    | |\\/| |/ _ \\ \\ / / _ \\ | |_ | | | |/ _ \\/ __/ __|  _  / \n" +
+                    " | |__| | |____| |  | | (_) \\ V /  __/ |__| | |_| |  __/\\__ \\__ \\ | \\ \\ \n" +
+                    "  \\____/ \\_____|_|  |_|\\___/ \\_/ \\___|\\_____\\__,_|\\___||___/___/_|  \\_\\ \n";
+            System.out.println(asciiArt);
 
-            // Get user input for menu selection
-            int choice = scanner.nextInt();
+            System.out.println("\nPlease choose an option:");
+            System.out.println("1) Play a game");
+            System.out.println("2) Read in a new PGN file");
+            System.out.println("3) View highscores");
+            System.out.println("4) Exit");
 
-            // Process user choice
+            int choice = getValidChoice(scanner, 1, 4);
+
             switch (choice) {
                 case 1:
-                    // Logic to play a game
-                    System.out.println("");
-                    System.out.println("Starting a new game...");
+                    System.out.println("\nStarting a new game...");
                     // Add game logic here
                     break;
                 case 2:
-                    // Logic to read in a new PGN
-                    System.out.println("");
-                    System.out.println("Reading in a new PGN...");
+                    System.out.println("\nReading in a new PGN...");
                     // Add file reading logic
                     break;
                 case 3:
-                    // Logic to view highscores
-                    System.out.println("");
-                    System.out.println("Viewing highscores...");
-                    HighScores Highscore = new HighScores();
-                    Highscore.printHighScores();
+                    System.out.println("\nViewing highscores...");
+                    HighScores highscore = new HighScores();
+                    highscore.printHighScores();
                     break;
                 case 4:
-                    // Exit the program
-                    System.out.println("");
-                    System.out.println("Closing the program. Goodbye! \uD83D\uDC4B");
-                    isRunning = false;
+                    if (confirmExit(scanner)) {
+                        System.out.println("\nClosing the program. Goodbye! \uD83D\uDC4B");
+                        isRunning = false;
+                    }
                     break;
-                default:
-                    System.out.println("Invalid choice. Please try again.");
             }
         }
 
-        // Close the scanner
         scanner.close();
+    }
+
+    private static int getValidChoice(Scanner scanner, int min, int max) {
+        int choice;
+        do {
+            System.out.print("Enter your choice (" + min + "-" + max + "): ");
+            while (!scanner.hasNextInt()) {
+                System.out.println("Invalid input. Please enter a number.");
+                scanner.next();
+            }
+            choice = scanner.nextInt();
+            if (choice < min || choice > max) {
+                System.out.println("Invalid choice. Please try again.");
+            }
+        } while (choice < min || choice > max);
+        return choice;
+    }
+
+    private static boolean confirmExit(Scanner scanner) {
+        System.out.print("Are you sure you want to exit? (y/n): ");
+        String confirm = scanner.next().toLowerCase();
+        return confirm.equals("y");
     }
 }
