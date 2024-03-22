@@ -3,39 +3,48 @@ package JCMoveGuessR;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class PGNParser {
-    public static void parsePGN() {
-        try (BufferedReader reader = new BufferedReader(new FileReader("game.pgn"))) {
+    private String filePath;
+
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
+    }
+
+    public Map<String, String> getMetadata() {
+        Map<String, String> metadata = new HashMap<>();
+        // Parsing logic for metadata
+        return metadata;
+    }
+
+    public List<String> getMoves() {
+        List<String> moves = new ArrayList<>();
+        try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
             String moveText = "";
             while ((line = reader.readLine()) != null) {
                 line = line.trim();
-                if (line.startsWith("[")) {
-                    // metadata tag
-                    int index = line.indexOf("\"");
-                    String key = line.substring(1, index);
-                    String value = line.substring(index + 1, line.length() - 2);
-                    System.out.println(key + " = " + value);
-                } else if (!line.isEmpty()) {
-                    // move or comment
+                if (!line.isEmpty()) {
                     if (line.charAt(0) == '{') {
-                        // comment
-                        continue;
+                        // Handle comments if needed
                     } else {
                         // move
                         moveText += line + " ";
                     }
                 }
             }
-            // parse the move text
-            String[] moves = moveText.split("\\s+");
-            for (String move : moves) {
-                System.out.print(move + " ");
+            // Parse the move text
+            String[] movesArray = moveText.split("\\s+");
+            for (String move : movesArray) {
+                moves.add(move);
             }
-            System.out.println();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return moves;
     }
 }
