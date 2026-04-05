@@ -25,22 +25,19 @@ public class PGNParser {
         List<String> moves = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath))) {
             String line;
-            String moveText = "";
+            StringBuilder moveText = new StringBuilder();
             while ((line = reader.readLine()) != null) {
                 line = line.trim();
-                if (!line.isEmpty()) {
-                    if (line.charAt(0) == '{') {
-                        // Handle comments if needed
-                    } else {
-                        // move
-                        moveText += line + " ";
-                    }
-                }
+                if (line.isEmpty() || line.startsWith("[")) continue;
+                moveText.append(line).append(" ");
             }
-            // Parse the move text
-            String[] movesArray = moveText.split("\\s+");
-            for (String move : movesArray) {
-                moves.add(move);
+            // Remove inline comments {...} and NAG annotations like $1
+            String text = moveText.toString().replaceAll("\\{[^}]*\\}", " ").replaceAll("\\$\\d+", "");
+            for (String token : text.split("\\s+")) {
+                if (token.isEmpty()) continue;
+                if (token.matches("\\d+\\.+")) continue; // move numbers: 1. 1... 12.
+                if (token.equals("1-0") || token.equals("0-1") || token.equals("1/2-1/2") || token.equals("*")) continue;
+                moves.add(token);
             }
         } catch (IOException e) {
             e.printStackTrace();
