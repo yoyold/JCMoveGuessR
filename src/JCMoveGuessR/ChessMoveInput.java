@@ -18,18 +18,26 @@ public class ChessMoveInput {
     }
 
     private static boolean isValidPgnMove(String move) {
-        // basic validation for move length and format
-        if (move.length() < 2) {
-            return false;
-        }
+        if (move.length() < 2) return false;
 
-        // check if the move is a pawn promotion (e.g., e4=Q)
+        // Strip check/checkmate suffixes
+        move = move.replaceAll("[+#]", "");
+
+        // Castling
+        if (move.equals("O-O") || move.equals("O-O-O")) return true;
+
+        // Promotion (e.g., e8=Q)
         if (move.contains("=")) {
             String[] parts = move.split("=");
-            return parts[0].matches("[a-h][1-8]") && parts[1].matches("[Q|R|B|N]");
+            return parts[0].matches("[a-h][1-8]") && parts[1].matches("[QRBN]");
         }
 
-        // check for the standard move format (e.g., Nf3, O-O)
-        return move.matches("[K|Q|R|B|N|P][a-h][1-8]") || move.equals("O-O") || move.equals("O-O-O");
+        // Piece move (e.g., Nf3, Bxc6, R1d3, Nbd2)
+        if (Character.isUpperCase(move.charAt(0))) {
+            return move.matches("[KQRBN][a-h1-8]?x?[a-h][1-8]");
+        }
+
+        // Pawn move (e.g., e4) or pawn capture (e.g., exd5)
+        return move.matches("[a-h][1-8]") || move.matches("[a-h]x[a-h][1-8]");
     }
 }

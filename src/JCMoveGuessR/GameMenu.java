@@ -3,6 +3,8 @@ package JCMoveGuessR;
 import java.util.Scanner;
 
 public class GameMenu {
+    private static String pgnFilePath = null;
+
     public static void displayMenu() {
         Scanner scanner = new Scanner(System.in);
         boolean isRunning = true;
@@ -29,12 +31,21 @@ public class GameMenu {
 
             switch (choice) {
                 case 1:
-                    System.out.println("\nStarting a new game...");
-                    // Add game logic here
+                    if (pgnFilePath == null) {
+                        System.out.println("\nNo PGN file loaded. Please load one first (option 2).");
+                    } else {
+                        new Game(pgnFilePath).start(scanner);
+                    }
                     break;
                 case 2:
-                    System.out.println("\nReading in a new PGN...");
-                    // Add file reading logic
+                    System.out.print("\nEnter path to PGN file: ");
+                    String path = scanner.nextLine().trim();
+                    if (path.isEmpty()) {
+                        System.out.println("No path entered.");
+                    } else {
+                        pgnFilePath = path;
+                        System.out.println("PGN file set to: " + pgnFilePath);
+                    }
                     break;
                 case 3:
                     System.out.println("\nViewing highscores...");
@@ -66,6 +77,7 @@ public class GameMenu {
                 System.out.println("Invalid choice. Please try again.");
             }
         } while (choice < min || choice > max);
+        scanner.nextLine(); // consume trailing newline after nextInt()
         return choice;
     }
 

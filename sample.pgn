@@ -1,0 +1,15 @@
+[Event "Sample Game"]
+[Site "Internet"]
+[Date "2024.01.01"]
+[White "Player A"]
+[Black "Player B"]
+[Result "1-0"]
+
+1. e4 e5 2. Nf3 Nc6 3. Bb5 a6 4. Ba4 Nf6 5. O-O Be7
+6. Re1 b5 7. Bb3 d6 8. c3 O-O 9. h3 Nb8 10. d4 Nbd7
+11. Nbd2 Bb7 12. Bc2 Re8 13. Nf1 Bf8 14. Ng3 g6
+15. a4 c5 16. d5 c4 17. axb5 axb5 18. Rxa8 Bxa8
+19. Nxb5 Qb6 20. Nfd4 exd4 21. Nxd4 Nc5 22. Ne6 Nxe6
+23. dxe6 Rxe6 24. Qf3 Re8 25. Bg5 h6 26. Bxf6 Bxf6
+27. Qxf6 Qxb2 28. Bd1 Bc6 29. Bc2 Qxc2 30. Qxe8+ Kh7
+1-0

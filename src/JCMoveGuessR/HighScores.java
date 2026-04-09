@@ -57,6 +57,7 @@ public class HighScores {
 
     private void printScores(List<String[]> highScores) {
         for (String[] score : highScores) {
+            if (score.length < 4) continue;
             System.out.printf("%-20s%-12s%-8s%-10s%n", score[0], score[1], score[2], score[3]);
         }
     }
