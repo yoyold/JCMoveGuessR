@@ -24,3 +24,12 @@ hs_err_pid*
 /out/production/JCMoveGuessR/META-INF/MANIFEST.MF
 highscores.csv
 highscores.txt
+
+# Maven build output
+/target/
+
+# Claude Code workspace
+.claude/
+
+# Auto-generated IntelliJ VCS config
+.idea/vcs.xml

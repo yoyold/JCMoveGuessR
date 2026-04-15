@@ -17,7 +17,7 @@ public class ChessMoveInput {
         }
     }
 
-    private static boolean isValidPgnMove(String move) {
+    static boolean isValidPgnMove(String move) {
         if (move.length() < 2) return false;
 
         // Strip check/checkmate suffixes
